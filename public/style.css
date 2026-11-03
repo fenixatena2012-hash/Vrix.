@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+:root{--gold:#f4cf82;--ink:#11182a;--glass:rgba(13,20,38,.86)}
+*{box-sizing:border-box}html,body,#game{margin:0;width:100%;height:100%;overflow:hidden;background:#11182a;color:#fff;font-family:Inter,system-ui}body{touch-action:none}canvas{display:block;width:100%;height:100%}
+.screen{position:fixed;inset:0;z-index:5;display:grid;place-items:center;padding:18px;background:radial-gradient(ellipse at 50% 38%,rgba(37,55,86,.3),rgba(7,12,25,.82))}
+.hidden{display:none!important}.panel{width:min(760px,100%);max-height:94dvh;overflow:auto;border:1px solid rgba(244,207,130,.34);border-radius:24px;background:linear-gradient(145deg,rgba(24,35,57,.97),rgba(10,17,32,.97));box-shadow:0 24px 90px #0009;padding:clamp(18px,4vw,34px)}
+.select-panel{text-align:center}.eyebrow{font-size:10px;letter-spacing:3px;color:var(--gold);font-weight:700}.panel h1{font:700 clamp(25px,5vw,38px) Cinzel,serif;margin:10px 0 5px}.muted{color:#aebbd0;font-size:13px;margin:0 0 20px}.character-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.character{min-width:0;position:relative;border:1px solid #ffffff20;border-radius:15px;background:linear-gradient(155deg,#263550,#172238);padding:9px 5px 10px;color:white;cursor:pointer;transition:.18s;min-height:110px}
+.character.selected{border-color:var(--gold);background:linear-gradient(155deg,#56452f,#202c43);box-shadow:0 0 0 2px #f4cf8230,0 0 24px #f4cf8220;transform:translateY(-2px)}
+.avatar{height:55px;display:grid;place-items:center;font-size:37px;filter:drop-shadow(0 5px 4px #0008)}.character b{display:block;font-size:11px;margin-top:5px}.character small{display:block;color:#aebbd0;font-size:9px;margin-top:3px}
+.enter-row{display:flex;gap:10px;margin-top:17px}.enter-row input{flex:1;min-width:0;background:#0d1526;border:1px solid #ffffff24;border-radius:12px;padding:14px;color:white;font-size:14px;outline:none}.enter-row button{border:0;border-radius:12px;padding:0 20px;background:linear-gradient(135deg,#f5d895,#b98943);color:#241b10;font-weight:800;font-size:12px;letter-spacing:.5px}
+#loading{z-index:10;background:radial-gradient(ellipse,#293c5b,#0b1120);text-align:center}#loading h1{font:700 26px Cinzel;color:var(--gold);letter-spacing:2px}#loading p{color:#c1cde0;font-size:13px}.crest{font-size:50px;color:var(--gold);animation:pulse 1.8s infinite}@keyframes pulse{50%{transform:scale(1.12);opacity:.65}}
+#hud{position:fixed;z-index:2;top:0;left:0;right:0;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(#091020b8,transparent);pointer-events:none}.brand{display:flex;align-items:center;gap:9px}.brand>span{color:var(--gold);font-size:25px}.brand b{display:block;font:700 12px Cinzel;letter-spacing:1px}.brand small{display:block;font-size:8px;letter-spacing:2px;color:#b6c3d8;margin-top:3px}.status{display:flex;align-items:center;gap:9px;font-size:10px;color:#d9e2f0}.level{border:1px solid #f4cf8270;border-radius:6px;padding:5px 7px;color:var(--gold)}.health{width:76px;height:6px;background:#ffffff30;border-radius:8px;overflow:hidden}.health i{display:block;width:100%;height:100%;background:linear-gradient(90deg,#53d68a,#a6e7a2)}
+#player-tag{position:fixed;z-index:2;top:66px;left:50%;transform:translateX(-50%);text-align:center;text-shadow:0 2px 6px #000}.#player-tag b{display:block}#player-tag b{font-size:12px}#player-tag small{display:block;color:#f4d99f;font-size:9px}
+#hint{position:fixed;z-index:2;top:105px;left:50%;transform:translateX(-50%);font-size:10px;color:#e5e9f1;background:#0d172b8c;padding:8px 13px;border:1px solid #ffffff20;border-radius:30px;white-space:nowrap;pointer-events:none}
+#mobile-controls{position:fixed;z-index:3;inset:auto 0 20px;display:flex;align-items:end;justify-content:space-between;padding:0 22px;pointer-events:none}
+#joystick{width:116px;height:116px;border-radius:50%;background:#dce8ff20;border:1px solid #ffffff45;position:relative;pointer-events:auto;touch-action:none;backdrop-filter:blur(5px)}
+#stick{position:absolute;width:48px;height:48px;left:33px;top:33px;border-radius:50%;background:linear-gradient(145deg,#fff9,#b9c8e5a8);border:1px solid #fff8;box-shadow:0 4px 15px #0006}
+.action-buttons{display:flex;gap:12px;pointer-events:auto}.action-buttons button{width:57px;height:57px;border-radius:50%;border:1px solid #f4cf8280;background:#1b2946dd;color:var(--gold);font-size:24px;box-shadow:0 5px 18px #0006;touch-action: manipulation}.action-buttons button:active{transform:scale(.92);background:#58472d}
+#chat-box{position:fixed;z-index:4;left:12px;bottom:150px;width:min(250px,55vw);background:#0c1426b8;border:1px solid #ffffff24;border-radius:12px;overflow:hidden;backdrop-filter:blur(8px)}
+#chat-lines{height:85px;overflow:auto;padding:8px;font-size:10px;color:#e0e8f6;line-height:1.5;overflow-wrap:anywhere}.system-msg{color:var(--gold)}#chat-form{display:flex;border-top:1px solid #ffffff20}#chat-input{min-width:0;width:100%;background:transparent;border:0;padding:8px;color:white;font-size:11px;outline:none}#chat-form button{background:transparent;border:0;color:var(--gold);padding:0 10px}
+#toast{position:fixed;z-index:8;top:22%;left:50%;transform:translateX(-50%);font-size:12px;background:#111b30e8;border:1px solid #f4cf8270;border-radius:30px;padding:10px 16px;opacity:0;transition:.25s;pointer-events:none}#toast.show{opacity:1}
+@media(max-width:520px){.character-grid{grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}.character{min-height:96px;padding:6px 2px}.avatar{font-size:30px;height:47px}.character b{font-size:9px}.character small{font-size:8px}.enter-row{flex-direction:column}.enter-row button{height:46px}.panel{padding:19px 13px}.brand b{font-size:10px}.status{gap:6px}.health{width:48px}#chat-box{bottom:146px}}
+@media(orientation:landscape) and (max-height:500px){#mobile-controls{bottom:8px}#joystick{width:90px;height:90px}#stick{left:25px;top:25px}#chat-box{bottom:108px}}
+
+/* Controles mobile-first: espaço reservado para dois polegares e um dedo de câmera. */
+#mobile-controls{left:0;right:0;bottom:max(12px,env(safe-area-inset-bottom));padding-left:max(18px,env(safe-area-inset-left));padding-right:max(20px,env(safe-area-inset-right));align-items:end}
+#joystick{flex:0 0 116px;touch-action:none;user-select:none;-webkit-user-select:none}
+.action-buttons{align-items:end;gap:14px}
+.action-buttons button{width:62px;height:62px;min-width:62px;min-height:62px;touch-action:none;user-select:none;-webkit-user-select:none}
+#attack{background:linear-gradient(145deg,#493a2cdd,#17243ddd)}
+#jump{background:linear-gradient(145deg,#344c6add,#17243ddd)}
+canvas{touch-action:none}
+@media (orientation:landscape) and (max-height:520px){
+  #hud{padding:7px 12px}
+  .brand>span{font-size:19px}.brand b{font-size:9px}.brand small{font-size:7px}
+  .status{font-size:9px}.level{padding:3px 6px}.health{width:55px;height:5px}
+  #player-tag{top:43px}#player-tag b{font-size:10px}#player-tag small{font-size:8px}
+  #hint{top:67px;font-size:9px;padding:5px 10px}
+  #mobile-controls{bottom:max(7px,env(safe-area-inset-bottom));padding-left:max(14px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))}
+  #joystick{width:94px;height:94px;flex-basis:94px}
+  #stick{width:44px;height:44px;left:24px;top:24px}
+  .action-buttons{gap:10px}.action-buttons button{width:54px;height:54px;min-width:54px;min-height:54px;font-size:21px}
+  #chat-box{left:10px;bottom:108px;width:min(210px,32vw)}
+  #chat-lines{height:52px;padding:5px;font-size:9px}
+  #chat-form input{padding:6px;font-size:10px}
+}
+@media (orientation:portrait) and (max-width:600px){
+  #mobile-controls{bottom:max(14px,env(safe-area-inset-bottom));padding:0 16px}
+  #joystick{width:104px;height:104px;flex-basis:104px}
+  #stick{left:28px;top:28px}
+  .action-buttons button{width:58px;height:58px;min-width:58px;min-height:58px}
+  #chat-box{bottom:138px;width:min(210px,52vw)}
+}
+
+#npc-interact:active{transform:translateX(-50%) scale(.96);background:#58472d}
+@media (orientation:landscape) and (max-height:520px){#npc-interact{bottom:76px;padding:9px 18px;font-size:10px}}

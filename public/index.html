@@ -1,1 +1,32 @@
-
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#10172b"><title>Reino das Nuvens — RPG</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="game"></div>
+<div id="loading" class="screen"><div class="crest">✦</div><h1>REINO DAS NUVENS</h1><p>Preparando seu mundo...</p></div>
+<section id="select" class="screen hidden">
+  <div class="panel select-panel">
+    <div class="eyebrow">✦ AVENTURE-SE ALÉM DAS NUVENS ✦</div>
+    <h1>Escolha seu herói</h1><p class="muted">10 destinos. Uma lenda começa com você.</p>
+    <div id="character-grid" class="character-grid"></div>
+    <div class="enter-row"><input id="player-name" maxlength="16" placeholder="Nome do aventureiro" value="Aventureiro"><button id="play">ENTRAR NO REINO <span>➜</span></button></div>
+  </div>
+</section>
+<header id="hud" class="hidden">
+  <div class="brand"><span>✦</span><div><b>REINO DAS NUVENS</b><small>VALE DOS ANTIGOS</small></div></div>
+  <div class="status"><span class="level">NV. 1</span><div class="health"><i></i></div><span id="online">1 online</span></div>
+</header>
+<div id="player-tag" class="hidden"><b id="hud-name">Aventureiro</b><small id="hud-class">Guardião</small></div>
+<div id="hint" class="hidden">Explore o vale e encontre outros aventureiros.</div>
+<div id="mobile-controls" class="hidden">
+  <div id="joystick"><div id="stick"></div></div>
+  <div class="action-buttons"><button id="attack" aria-label="Atacar">⚔</button><button id="jump" aria-label="Pular">↑</button></div>
+</div>
+<div id="chat-box" class="hidden"><div id="chat-lines"><div class="system-msg">Bem-vindo ao Reino das Nuvens!</div></div><form id="chat-form"><input id="chat-input" maxlength="120" placeholder="Diga algo..."><button>➤</button></form></div>
+<div id="toast"></div>
+<script src="/socket.io/socket.io.js"></script><script type="module" src="game.js"></script>
+</body></html>
