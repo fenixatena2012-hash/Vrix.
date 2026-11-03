@@ -1,0 +1,14 @@
+{
+  "name": "eclipse-reinos-das-trevas",
+  "version": "1.0.0",
+  "description": "Protótipo 3D dark fantasy multiplayer para navegador",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": { "node": ">=18" },
+  "dependencies": {
+    "express": "^4.21.2",
+    "socket.io": "^4.8.1"
+  }
+}
