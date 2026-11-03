@@ -1,0 +1,8 @@
+{
+  "name": "reino-das-nuvens-rpg",
+  "version": "1.1.0",
+  "description": "RPG de fantasia 3D multiplayer, otimizado para celular",
+  "type": "module",
+  "scripts": { "start": "node server.js", "dev": "node --watch server.js" },
+  "dependencies": { "express": "^4.21.2", "socket.io": "^4.8.1" }
+}
